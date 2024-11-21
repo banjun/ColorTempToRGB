@@ -5,21 +5,23 @@
 //
 
 import Foundation
-import UIKit
 import SwiftUI
 
-typealias Kelvin = CGFloat
+public typealias Kelvin = CGFloat
 
-extension UIColor {
+#if canImport(UIKit)
+import UIKit
+public extension UIColor {
     convenience init(temperature: Kelvin)
     {
         let components = componentsForColorTemperature(temperature: temperature)
         self.init(red: components.red, green: components.green, blue: components.blue, alpha: 1)
     }
 }
+#endif
 
 extension Color {
-    init(temperature: Kelvin) {
+    public init(temperature: Kelvin) {
         let components = componentsForColorTemperature(temperature: temperature)
         self.init(red: components.red, green: components.green, blue: components.blue)
     }
@@ -30,7 +32,7 @@ extension Color {
     Algorithm taken from Tanner Helland's post: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
 
 */
-func componentsForColorTemperature(temperature: Kelvin) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
+public func componentsForColorTemperature(temperature: Kelvin) -> (red: CGFloat, green: CGFloat, blue: CGFloat) {
     let percentKelvin = temperature / 100;
     let red, green, blue: CGFloat
 
